@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Design\DesignTariffsService.cs" />
     <Compile Include="Helpers\DialogService.cs" />
     <Compile Include="Helpers\INavigationService.cs" />
     <Compile Include="Helpers\IDialogService.cs" />

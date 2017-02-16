@@ -100,8 +100,11 @@ namespace UtilitiesExpenses.ViewModel
         }
 
         public MainViewModel()
-            : this(new TariffsService(), new DialogService(), new NavigationService())
-        { }
+            : this(new Design.DesignTariffsService(), new DialogService(), new NavigationService())
+        {
+            Refresh();
+            SelectedTariff = TariffList[2];
+        }
 
         public event PropertyChangedEventHandler PropertyChanged = new PropertyChangedEventHandler((s, a) => { });
 
