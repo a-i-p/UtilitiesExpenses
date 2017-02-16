@@ -100,7 +100,11 @@ namespace UtilitiesExpenses.ViewModel
         }
 
         public MainViewModel()
-            : this(new Design.DesignTariffsService(), new DialogService(), new NavigationService())
+            : this(System.Windows.Application.Current is App
+                        ? new TariffsService()
+                        : (ITariffsService)new Design.DesignTariffsService(),
+                  new DialogService(),
+                  new NavigationService())
         {
 #if DEBUG
             Refresh();
