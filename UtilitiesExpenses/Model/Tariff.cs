@@ -7,9 +7,13 @@ namespace UtilitiesExpenses.Model
     /// </summary>
     public sealed class Tariff : INotifyPropertyChanged
     {
+        private string _name;
+        private decimal _rate;
+
+        public event PropertyChangedEventHandler PropertyChanged = new PropertyChangedEventHandler((s, a) => { });
+
         public int Id { get; set; }
 
-        private string _name;
         /// <summary>
         /// Наименование тарифа.
         /// </summary>
@@ -26,7 +30,6 @@ namespace UtilitiesExpenses.Model
             }
         }
 
-        decimal _rate;
         /// <summary>
         /// Тарифная ставка.
         /// </summary>
@@ -42,8 +45,6 @@ namespace UtilitiesExpenses.Model
                 }
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged = new PropertyChangedEventHandler((s, a) => { });
 
         private void RaisePropertyChanged(string propertyName)
         {
