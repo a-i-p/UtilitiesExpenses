@@ -62,11 +62,18 @@ namespace UtilitiesExpenses.ViewModel
                     ?? (_saveCommand = new RelayCommand<Tariff>(
                                             tariff =>
                                             {
-                                                int result = _dataService.Save(tariff);
-
-                                                if (result <= 0)
+                                                try
                                                 {
-                                                    _dialogService.ShowMessage("Error");
+                                                    int result = _dataService.Save(tariff);
+
+                                                    if (result <= 0)
+                                                    {
+                                                        _dialogService.ShowMessage("Error");
+                                                    }
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    _dialogService.ShowMessage(ex.Message);
                                                 }
                                             }));
             }
