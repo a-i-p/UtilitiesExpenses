@@ -1,18 +1,18 @@
 ﻿<Application x:Class="UtilitiesExpenses.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:UtilitiesExpenses"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:UtilitiesExpenses"
              xmlns:vm="clr-namespace:UtilitiesExpenses.ViewModel"
              StartupUri="MainWindow.xaml">
 
     <Application.Resources>
         <ResourceDictionary>
-            
+
             <vm:MainViewModel x:Key="Main" />
 
             <System:String x:Key="AppName">MVVM LIGHT INTRO</System:String>
-            
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>

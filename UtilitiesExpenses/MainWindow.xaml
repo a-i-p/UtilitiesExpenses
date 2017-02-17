@@ -2,12 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UtilitiesExpenses"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="900"
-        DataContext="{Binding Source={StaticResource Main}}">
+        xmlns:local="clr-namespace:UtilitiesExpenses"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow"
+        Width="900"
+        Height="500"
+        DataContext="{Binding Source={StaticResource Main}}"
+        mc:Ignorable="d">
 
     <Window.Resources>
         <DataTemplate x:Key="TariffTemplate">
@@ -15,13 +17,13 @@
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonDown">
                         <i:InvokeCommandAction Command="{Binding ShowDetailsCommand, Source={StaticResource Main}}"
-                                               CommandParameter="{Binding Mode=OneWay}"/>
+                                               CommandParameter="{Binding Mode=OneWay}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <TextBlock Text="{Binding Name}"
-                       Style="{StaticResource NameTextBlockStyle}" />
-                <TextBlock Text="{Binding Rate}"
-                       Style="{StaticResource NameTextBlockStyle}" />
+                <TextBlock Style="{StaticResource NameTextBlockStyle}"
+                           Text="{Binding Name}" />
+                <TextBlock Style="{StaticResource NameTextBlockStyle}"
+                           Text="{Binding Rate}" />
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
@@ -39,48 +41,53 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel x:Name="TitePanel"
-                    Grid.Row="0" Grid.ColumnSpan="2"
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
                     Margin="12,17,0,12">
 
-            <TextBlock Text="{StaticResource AppName}"
-                       Margin="12,0" />
-            <TextBlock Text="why mvvm?"
-                       Margin="9,-7,0,0" />
+            <TextBlock Margin="12,0"
+                       Text="{StaticResource AppName}" />
+            <TextBlock Margin="9,-7,0,0"
+                       Text="why mvvm?" />
 
         </StackPanel>
 
-        <Button Grid.Row="1" Grid.Column="0"
-                Content="Refresh"
+        <Button Grid.Row="1"
+                Grid.Column="0"
                 Margin="12,6,12,6"
-                Command="{Binding RefreshCommand}" />
+                Command="{Binding RefreshCommand}"
+                Content="Refresh" />
 
-        <Button Grid.Row="1" Grid.Column="1"
-                Content="Save"
+        <Button Grid.Row="1"
+                Grid.Column="1"
                 Margin="12,6,12,6"
-                Command="{Binding SaveCommand}" CommandParameter="{Binding SelectedTariff, Mode=OneWay}" />
+                Command="{Binding SaveCommand}"
+                CommandParameter="{Binding SelectedTariff, Mode=OneWay}"
+                Content="Save" />
 
         <Grid x:Name="ContentPanel"
-              Grid.Row="2" Grid.Column="0"
+              Grid.Row="2"
+              Grid.Column="0"
               Margin="12,0,12,12">
-            <ListBox ItemsSource="{Binding TariffList}"
-                     ItemTemplate="{StaticResource TariffTemplate}">
-            </ListBox>
+            <ListBox ItemTemplate="{StaticResource TariffTemplate}"
+                     ItemsSource="{Binding TariffList}" />
         </Grid>
 
         <StackPanel x:Name="DetailsContentPanel"
-                    Grid.Row="2" Grid.Column="1"
+                    Grid.Row="2"
+                    Grid.Column="1"
                     Margin="12,0,12,12">
-            <TextBlock Text="Id:"
-                       Style="{StaticResource LabelTextStyle}" />
+            <TextBlock Style="{StaticResource LabelTextStyle}"
+                       Text="Id:" />
             <TextBox IsReadOnly="True"
                      Text="{Binding SelectedTariff.Id, Mode=OneWay}" />
 
-            <TextBlock Text="Name:"
-                       Style="{StaticResource LabelTextStyle}" />
+            <TextBlock Style="{StaticResource LabelTextStyle}"
+                       Text="Name:" />
             <TextBox Text="{Binding SelectedTariff.Name, Mode=TwoWay}" />
 
-            <TextBlock Text="Rate:"
-                       Style="{StaticResource LabelTextStyle}" />
+            <TextBlock Style="{StaticResource LabelTextStyle}"
+                       Text="Rate:" />
             <TextBox Text="{Binding SelectedTariff.Rate, Mode=TwoWay}" />
         </StackPanel>
 
