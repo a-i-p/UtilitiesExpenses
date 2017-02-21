@@ -35,7 +35,7 @@ namespace UtilitiesExpenses.ViewModel
                   new NavigationService())
         {
 #if DEBUG
-            Refresh();
+            refresh();
             SelectedTariff = TariffList[2];
 #endif
         }
@@ -49,7 +49,7 @@ namespace UtilitiesExpenses.ViewModel
                 return _refreshCommand
                   ?? (_refreshCommand = new RelayCommand(() =>
                   {
-                      Refresh();
+                      refresh();
                   }));
             }
         }
@@ -113,7 +113,7 @@ namespace UtilitiesExpenses.ViewModel
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Refresh()
+        private void refresh()
         {
             TariffList.Clear();
 
