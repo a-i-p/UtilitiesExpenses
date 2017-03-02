@@ -83,11 +83,7 @@ namespace UtilitiesExpenses.ViewModel
             get { return _selectedTariff; }
             set
             {
-                if (_selectedTariff != value)
-                {
-                    _selectedTariff = value;
-                    RaisePropertyChanged(nameof(SelectedTariff));
-                }
+                Set(nameof(SelectedTariff), ref _selectedTariff, value);
             }
         }
 
