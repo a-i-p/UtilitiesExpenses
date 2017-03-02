@@ -1,16 +1,14 @@
-﻿using System.ComponentModel;
+﻿using GalaSoft.MvvmLight;
 
 namespace UtilitiesExpenses.Model
 {
     /// <summary>
     /// Тариф на услуги.
     /// </summary>
-    public sealed class Tariff : INotifyPropertyChanged
+    public sealed class Tariff : ObservableObject
     {
         private string _name;
         private decimal _rate;
-
-        public event PropertyChangedEventHandler PropertyChanged = new PropertyChangedEventHandler((s, a) => { });
 
         public int Id { get; set; }
 
@@ -44,11 +42,6 @@ namespace UtilitiesExpenses.Model
                     RaisePropertyChanged(nameof(Rate));
                 }
             }
-        }
-
-        private void RaisePropertyChanged(string propertyName)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
