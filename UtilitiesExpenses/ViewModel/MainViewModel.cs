@@ -29,18 +29,14 @@ namespace UtilitiesExpenses.ViewModel
         }
 
         public MainViewModel()
-            : this(System.Windows.Application.Current is App
-                        ? new TariffsService()
-                        : (ITariffsService)new Design.DesignTariffsService(),
+            : this(IsInDesignModeStatic
+                        ? (ITariffsService)new Design.DesignTariffsService()
+                        : new TariffsService(),
                   new DialogService(),
                   new NavigationService())
         {
 #if DEBUG
-            if (System.Windows.Application.Current is App)
-            {
-                return;
-            }
-            else
+            if (IsInDesignModeStatic)
             {
                 refresh();
                 SelectedTariff = TariffList[2];
