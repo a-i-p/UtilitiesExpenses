@@ -20,11 +20,7 @@ namespace UtilitiesExpenses.Model
             get { return _name; }
             set
             {
-                if (_name != value)
-                {
-                    _name = value;
-                    RaisePropertyChanged(nameof(Name));
-                }
+                Set(nameof(Name), ref _name, value);
             }
         }
 
@@ -36,11 +32,7 @@ namespace UtilitiesExpenses.Model
             get { return _rate; }
             set
             {
-                if (_rate != value)
-                {
-                    _rate = value;
-                    RaisePropertyChanged(nameof(Rate));
-                }
+                Set(nameof(Rate), ref _rate, value);
             }
         }
     }
