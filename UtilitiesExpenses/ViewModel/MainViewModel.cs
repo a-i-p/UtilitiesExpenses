@@ -36,8 +36,15 @@ namespace UtilitiesExpenses.ViewModel
                   new NavigationService())
         {
 #if DEBUG
-            refresh();
-            SelectedTariff = TariffList[2];
+            if (System.Windows.Application.Current is App)
+            {
+                return;
+            }
+            else
+            {
+                refresh();
+                SelectedTariff = TariffList[2];
+            }
 #endif
         }
 
