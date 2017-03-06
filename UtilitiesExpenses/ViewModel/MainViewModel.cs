@@ -99,7 +99,8 @@ namespace UtilitiesExpenses.ViewModel
                     {
                         SelectedTariff = new Tariff { Id = tariff.Id, Name = tariff.Name, Rate = tariff.Rate };
                         _navigationService.NavigateTo(new Uri(tariff.Name, UriKind.Relative));
-                    }));
+                    },
+                    tariff => SelectedTariff?.Id != tariff.Id));
             }
         }
 
