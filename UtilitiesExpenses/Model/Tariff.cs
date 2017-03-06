@@ -7,10 +7,23 @@ namespace UtilitiesExpenses.Model
     /// </summary>
     public sealed class Tariff : ObservableObject
     {
+        private bool _isDirty;
         private string _name;
         private decimal _rate;
 
         public int Id { get; set; }
+
+        /// <summary>
+        /// Указывает, что сущность изменена.
+        /// </summary>
+        public bool IsDirty
+        {
+            get { return _isDirty; }
+            set
+            {
+                Set(nameof(IsDirty), ref _isDirty, value);
+            }
+        }
 
         /// <summary>
         /// Наименование тарифа.
@@ -20,7 +33,10 @@ namespace UtilitiesExpenses.Model
             get { return _name; }
             set
             {
-                Set(nameof(Name), ref _name, value);
+                if (Set(nameof(Name), ref _name, value))
+                {
+                    IsDirty = true;
+                }
             }
         }
 
@@ -32,7 +48,10 @@ namespace UtilitiesExpenses.Model
             get { return _rate; }
             set
             {
-                Set(nameof(Rate), ref _rate, value);
+                if (Set(nameof(Rate), ref _rate, value))
+                {
+                    IsDirty = true;
+                }
             }
         }
     }
