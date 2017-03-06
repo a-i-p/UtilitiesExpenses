@@ -1,18 +1,29 @@
-﻿using System.ComponentModel;
+﻿using GalaSoft.MvvmLight;
 
 namespace UtilitiesExpenses.Model
 {
     /// <summary>
     /// Тариф на услуги.
     /// </summary>
-    public sealed class Tariff : INotifyPropertyChanged
+    public sealed class Tariff : ObservableObject
     {
+        private bool _isDirty;
         private string _name;
         private decimal _rate;
 
-        public event PropertyChangedEventHandler PropertyChanged = new PropertyChangedEventHandler((s, a) => { });
-
         public int Id { get; set; }
+
+        /// <summary>
+        /// Указывает, что сущность изменена.
+        /// </summary>
+        public bool IsDirty
+        {
+            get { return _isDirty; }
+            set
+            {
+                Set(nameof(IsDirty), ref _isDirty, value);
+            }
+        }
 
         /// <summary>
         /// Наименование тарифа.
@@ -22,10 +33,9 @@ namespace UtilitiesExpenses.Model
             get { return _name; }
             set
             {
-                if (_name != value)
+                if (Set(nameof(Name), ref _name, value))
                 {
-                    _name = value;
-                    RaisePropertyChanged(nameof(Name));
+                    IsDirty = true;
                 }
             }
         }
@@ -38,17 +48,11 @@ namespace UtilitiesExpenses.Model
             get { return _rate; }
             set
             {
-                if (_rate != value)
+                if (Set(nameof(Rate), ref _rate, value))
                 {
-                    _rate = value;
-                    RaisePropertyChanged(nameof(Rate));
+                    IsDirty = true;
                 }
             }
-        }
-
-        private void RaisePropertyChanged(string propertyName)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

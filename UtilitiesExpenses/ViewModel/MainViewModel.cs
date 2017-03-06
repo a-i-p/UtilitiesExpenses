@@ -1,14 +1,14 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using UtilitiesExpenses.Helpers;
 using UtilitiesExpenses.Model;
 
 namespace UtilitiesExpenses.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : ViewModelBase
     {
         private ITariffsService _dataService;
         private IDialogService _dialogService;
@@ -28,26 +28,20 @@ namespace UtilitiesExpenses.ViewModel
         }
 
         public MainViewModel()
-            : this(System.Windows.Application.Current is App
-                        ? new TariffsService()
-                        : (ITariffsService)new Design.DesignTariffsService(),
+            : this(IsInDesignModeStatic
+                        ? (ITariffsService)new Design.DesignTariffsService()
+                        : new TariffsService(),
                   new DialogService(),
                   new NavigationService())
         {
 #if DEBUG
-            if (System.Windows.Application.Current is App)
-            {
-                return;
-            }
-            else
+            if (IsInDesignModeStatic)
             {
                 refresh();
                 SelectedTariff = TariffList[2];
             }
 #endif
         }
-
-        public event PropertyChangedEventHandler PropertyChanged = new PropertyChangedEventHandler((s, a) => { });
 
         public RelayCommand RefreshCommand
         {
@@ -91,11 +85,7 @@ namespace UtilitiesExpenses.ViewModel
             get { return _selectedTariff; }
             set
             {
-                if (_selectedTariff != value)
-                {
-                    _selectedTariff = value;
-                    RaisePropertyChanged(nameof(SelectedTariff));
-                }
+                Set(nameof(SelectedTariff), ref _selectedTariff, value);
             }
         }
 
@@ -114,11 +104,6 @@ namespace UtilitiesExpenses.ViewModel
         }
 
         public ObservableCollection<Tariff> TariffList { get; private set; }
-
-        protected virtual void RaisePropertyChanged(string propertyName)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         private void refresh()
         {
